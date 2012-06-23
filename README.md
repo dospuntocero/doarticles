@@ -1,8 +1,5 @@
 #Dataobject Articles for silverstripe 3 - dataobject as pages
 
-## Maintainer ##
-francisco arenas (fa@dospuntocero.cl)
-
 ##Overview
 
 This is a simple module for adding dataobject as pages functionality on silverstripe 3, can be used for news, products or anything you can think of that doesnt need to appear in the sitetree. If you have an object that you will create more than 20, i believe that this module is better than using Pages, because of the way the sitetree works and maybe because of performance (large sitetree its slower than a datalist).
@@ -15,6 +12,9 @@ With this module you can control Articles in several "Article Holder Pages", tho
 
 ## TODO ##
 Search capabilities... im working on this module to learn how silvertripe 3 handles things, so i think this will be the next step.
+
+## Maintainer ##
+francisco arenas (fa@dospuntocero.cl)
 
 ## License ##
 Do what you want with it, I'm happy that you can use this small module, and if you use it, just let me know and if you can improve it, just sent me a pull request :)
