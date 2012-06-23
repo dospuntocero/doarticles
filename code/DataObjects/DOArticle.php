@@ -9,22 +9,27 @@ class DOArticle extends DataObject{
 		'Excerpt' => 'HTMLText',
 		'Date' => 'Date',
 		'Featured' => 'Boolean'
-		);
+	);
 
 	static $has_one = array (
 		'ArticleHolder' => 'DOArticleHolderPage',
 		'ImageSet' => 'Image'
-		);
+	);
 
 	static $searchable_fields = array(
 		'Title',
-		'Content'
-		);
+		'Content',
+		'ArticleHolder.Title'
+	);
 
 	static $summary_fields = array(
-		'Title' => 'Title',
+		'SmallTitle' => 'Title',
 		'ArticleHolder.Title' => 'Category'
-		);
+	);
+
+	function getSmallTitle(){
+		return $this->dbObject('Title')->LimitCharacters(90);
+	}
 
 	function Link(){
 		return "view/".$this->URLSegment;
