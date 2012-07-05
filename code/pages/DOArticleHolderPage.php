@@ -15,16 +15,33 @@ class DOArticleHolderPage extends Page {
 	static $has_many = array(
 		'DOArticles' => 'DOArticle',
 	);
+	
+	public function getGroupedArticlesByDate() {
+	    return GroupedList::create(DOArticle::get()->sort('Date DESC'));
+	}
+
 }
 
 class DOArticleHolderPage_Controller extends Page_Controller {
 
 
+	public function archive() {
+		// ==========================================
+		// = no idea how to do this function... :) =
+		// ==========================================
+	}
+
+	public function LatestArticles() {
+
+    return DataList::create('DOArticle')->filter(array('ArticleHolderID' => $this->ID))->sort('Created')->Limit(5);
+	}
+
+
 	public function PaginatedArticles() {
-	    $pages = DataList::create('DOArticle')->filter(array('ArticleHolderID' => $this->ID))->sort('Date');
+		$pages = DataList::create('DOArticle')->filter(array('ArticleHolderID' => $this->ID))->sort('Date');
 		$list = new PaginatedList($pages, $this->request);
-		$list->setPageLength(10);
-	    return $list;
+		$list->setPageLength(5);
+		return $list;
 	}
 
 	function view(){
@@ -37,4 +54,6 @@ class DOArticleHolderPage_Controller extends Page_Controller {
 	    }
 	    return $this->httpError(404);
 	}
+
+
 }

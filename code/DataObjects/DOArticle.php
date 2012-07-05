@@ -36,6 +36,10 @@ class DOArticle extends DataObject{
 		
 	}
 
+	public function getMonth() {
+		return date('M', strtotime($this->Date));
+	}
+
 	public function getCMSFields() {
 
 		$UploadField = new UploadField('ImageSet', _t('DOArticles.MainImage',"Main image", null, null, null, "MainImages"));

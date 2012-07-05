@@ -1,19 +1,32 @@
 <% if PaginatedArticles.MoreThanOnePage %>
-	<% if PaginatedArticles.NotFirstPage %>
-		<a class="prev" href="$PaginatedArticles.PrevLink"><% _t('DOArticlesPagination.PREV','Prev') %></a>
-	<% end_if %>
-	<% loop PaginatedArticles.Pages %>
-		<% if CurrentBool %>
-			$PageNum
-			<% else %>
-			<% if Link %>
-				<a href="$Link">$PageNum</a>
-			<% else %>
-			...
+	<div class="pagination">
+	  <ul>	  
+			<% if PaginatedArticles.NotFirstPage %>
+				<li>
+					<a href="$PaginatedArticles.PrevLink"><% _t('DOArticlesPagination.PREV','Prev') %></a>
+				</li>
 			<% end_if %>
-		<% end_if %>
-	<% end_loop %>
-	<% if PaginatedArticles.NotLastPage %>
-		<a class="next" href="$PaginatedArticles.NextLink"><% _t('DOArticlesPagination.NEXT','Next') %></a>
-	<% end_if %>
+			<% loop PaginatedArticles.Pages %>
+				<% if CurrentBool %>
+					<li class="active">
+						<a href="#">$PageNum</a>
+					<% else %>
+					<% if Link %>
+						<li>
+							<a href="$Link">$PageNum</a>
+					<% else %>
+						<li>
+							...
+					<% end_if %>
+				<% end_if %>
+			</li>
+			<% end_loop %>
+
+			<% if PaginatedArticles.NotLastPage %>
+			<li>
+				<a href="$PaginatedArticles.NextLink"><% _t('DOArticlesPagination.NEXT','Next') %></a>
+			</li>
+			<% end_if %>
+	  </ul>
+	</div>
 <% end_if %>
