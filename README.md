@@ -1,5 +1,9 @@
 #Dataobject Articles for silverstripe 3 - dataobject as pages
 
+##Whats new?
+Now DOArticles has an archive function! that means that your articles can be filtered by year and month. the url for this is your-holderpage/archive/year/month
+if the month is empty it automatically will show all the posts for the complete year paginated. amazing isn't it? -> thanks stuckinrealtime
+
 ##Overview
 
 This is a simple module for adding dataobject as pages functionality on silverstripe 3, can be used for news, products or anything you can think of that doesnt need to appear in the sitetree. If you have an object that you will create more than 20, i believe that this module is better than using Pages, because of the way the sitetree works and maybe because of performance (large sitetree its slower than a datalist).
