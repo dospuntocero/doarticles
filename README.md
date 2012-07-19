@@ -20,6 +20,9 @@ Search capabilities... im working on this module to learn how silvertripe 3 hand
 ## Maintainer ##
 francisco arenas (fa@dospuntocero.cl)
 
+## Amazing coder ##
+shawn mathews (stuckinrealtime@gmail.com)
+
 ## License ##
 Do what you want with it, I'm happy that you can use this small module, and if you use it, just let me know and if you can improve it, just sent me a pull request :)
 
