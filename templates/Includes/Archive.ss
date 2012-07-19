@@ -2,13 +2,10 @@
 <% loop GroupedArticlesByDate %>
 	<ul>
 	    <li><a href="{$Top.Link()}archive/$Year">$Year</a>
-	        <% if Children %>
-	        <ul>
-	            <% loop Children %>
-	            <li><a href="{$Top.Link()}$Year/$Month">$Month</a></li>
-	            <% end_loop %>
-	        </ul>
-
+	        <% if Children %><br />
+            <% loop Children %>
+							<a href="{$Top.Link()}archive/$Year/$Month">$Month</a>
+            <% end_loop %>
 	        <% end_if %>
 	    </li>
 	</ul>

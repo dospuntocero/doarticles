@@ -23,5 +23,5 @@
 		<% end_loop %>
 	</ul>
 	
-	<% include GroupedByYear %>
+	<% include Archive %>
 </aside>
