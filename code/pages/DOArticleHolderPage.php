@@ -16,9 +16,51 @@ class DOArticleHolderPage extends Page {
 		'DOArticles' => 'DOArticle',
 	);
 	
-	public function getGroupedArticlesByDate() {
-	    return GroupedList::create(DOArticle::get()->sort('Date DESC'));
+	public function GroupedArticlesByDate() {
+        $rtnval = false;
+				
+        $monthMap = array(
+            'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'
+        );
+        $rslts = DB::query("SELECT DISTINCT YEAR(\"Date\") as Year From DOArticle where ArticleHolderID = {$this->ID} Order By YEAR(\"Date\") desc");
+        if ($rslts) {
+            $rtnval = new ArrayList();
+            while($yrow = $rslts->nextRecord()) {
+                $tmpRow = new ArrayList();
+                $months = DB::query("SELECT DISTINCT MONTH(\"Date\") as theMonth From DOArticle where ArticleHolderID = {$this->ID} and YEAR(\"Date\") = {$yrow['Year']} Order By Month(\"Date\") asc");
+                while($mrow = $months->nextRecord()) {
+                    //Debug::show($mrow);
+                    $tmpRow->push(new ArrayData(
+                        array(
+                           'Year' => $yrow['Year'],
+                           'Month' => $monthMap[(((int) $mrow['theMonth'])-1)],
+                           'Children' => DataObject::get('DOArticle',"ArticleHolderID = {$this->ID} and (YEAR(\"Date\") = {$yrow['Year']} and MONTH(\"Date\") = {$mrow['theMonth']})")
+                        )
+                    ));
+                }
+                $rtnval->push(new ArrayData(
+                    array(
+                        'Year' => $yrow['Year'],
+                        'Children' => $tmpRow
+                    )
+                ));
+            }
+        }
+
+        //Debug::show($rtnval);
+        return $rtnval;
 	}
+
+
+    public function LinkByYear($year) {
+        return Controller::join_links($this->Link(),'archive',$year);
+    }
+
+    public function LinkByMonth($year,$month) {
+        return Controller::join_links($this->Link(),'archive',$year,$month);
+    }
+
+
 
 }
 
@@ -43,6 +85,9 @@ class DOArticleHolderPage_Controller extends Page_Controller {
 		$list->setPageLength(5);
 		return $list;
 	}
+
+
+
 
 	function view(){
 	    $pid = $this->URLParams['ID'];

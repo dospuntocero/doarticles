@@ -32,12 +32,20 @@ class DOArticle extends DataObject{
 	}
 
 	function Link(){
-		return "view/".$this->URLSegment;
-		
+//		return "view/".$this->URLSegment;
+		return Controller::join_links($this->ArticleHolder()->Link(),'view',$this->URLSegment);
 	}
 
-	public function getMonth() {
+	function LinkByMonth($year,$month) {
+		return Controller::join_links($this->Link(),'archive',$year,$month);
+	}
+
+	function getMonth() {
 		return date('M', strtotime($this->Date));
+	}
+
+	public function getYear() {
+		return date('Y',strtotime($this->Date));
 	}
 
 	public function getCMSFields() {
@@ -63,5 +71,6 @@ class DOArticle extends DataObject{
 
 		return $fields;
 	}
+
 
 }

@@ -7,7 +7,7 @@
 				$ImageSet.SetWidth(200)
 			</div>
 			<div class="content">
-				<h2><a href="$Top.URLSegment/$Link">$Title</a></h2>
+				<h2><a href="$Link">$Title</a></h2>
 				<p>$Date.Nice</p>
 				$Excerpt
 			</div>
