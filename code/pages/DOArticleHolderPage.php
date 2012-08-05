@@ -12,7 +12,7 @@ class DOArticleHolderPage extends Page {
 	static $can_be_root = true; //
 	static $hide_ancestor = null; //dont show ancestry class
 
-	static $has_many = array(
+	static $many_many = array(
 		'DOArticles' => 'DOArticle',
 	);
 	

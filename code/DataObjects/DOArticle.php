@@ -11,20 +11,21 @@ class DOArticle extends DataObject{
 		'Featured' => 'Boolean'
 	);
 
+	static $belongs_many_many = array(
+		'DOArticleHolderPages' => 'DOArticleHolderPage',
+	);
+	
 	static $has_one = array (
-		'ArticleHolder' => 'DOArticleHolderPage',
 		'ImageSet' => 'Image'
 	);
 
 	static $searchable_fields = array(
 		'Title',
-		'Content',
-		'ArticleHolder.Title'
+		'Content'
 	);
 
 	static $summary_fields = array(
-		'SmallTitle' => 'Title',
-		'ArticleHolder.Title' => 'Category'
+		'SmallTitle' => 'Title'
 	);
 
 	function getSmallTitle(){
@@ -33,7 +34,7 @@ class DOArticle extends DataObject{
 
 	function Link(){
 //		return "view/".$this->URLSegment;
-		return Controller::join_links($this->ArticleHolder()->Link(),'view',$this->URLSegment);
+		return Controller::join_links($this->DOArticleHolderPages()->Link(),'view',$this->URLSegment);
 	}
 
 	function LinkByMonth($year,$month) {
