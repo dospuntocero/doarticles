@@ -1,7 +1,21 @@
 <?php
+/**
+ * @property String Title
+ * @property String Content
+ * @property String Excerpt
+ * @property String Date
+ * @property bool Featured
+ * @property int ArticleHolderID
+ * @property int ImageSetID
+ * @method ManyManyList Tags($filter = "", $sort = "", $join = "", $limit = "")
+ * @method DOArticleHolderPage ArticleHolder()
+ * @method Image ImageSet()
+ */
 class DOArticle extends DataObject{
 	static $singular_name = "Article";
 	static $plural_name = "Articles";
+
+    protected $tagsAsString = "";
 
 	static $db = array (
 		'Title' => 'Varchar(255)',
@@ -26,6 +40,28 @@ class DOArticle extends DataObject{
 		'SmallTitle' => 'Title',
 		'ArticleHolder.Title' => 'Category'
 	);
+
+    static $many_many = array(
+        'Tags' => 'DOTag'
+    );
+
+    static $casting = array(
+        'TagsAsString' => 'Text'
+    );
+
+    public function __construct($record = null, $isSingleton = false, $model = null) {
+        $this->tagsAsString = "";
+        parent::__construct($record, $isSingleton, $model);
+
+
+        if ($this->Tags()->count() > 0) {
+            $tgList = $this->Tags()->map('ID','Title')->values();
+            if(sizeof($tgList) > 0) {
+                $this->tagsAsString = join(", ",$tgList);
+            }
+        }
+
+    }
 
 	function getSmallTitle(){
 		return $this->dbObject('Title')->LimitCharacters(90);
@@ -71,6 +107,51 @@ class DOArticle extends DataObject{
 
 		return $fields;
 	}
+
+    /**
+     *  @todo figure out how data is initialized in SS3 and make this a true getter/setter
+     */
+    public function getTagsAsString() {
+        return $this->tagsAsString;
+    }
+
+    public function setTagsAsString($t) {
+        $this->tagsAsString = $t;
+    }
+
+    public function onAfterWrite() {
+        parent::onAfterWrite();
+        // assume tags as string is a comma seperated list and build tags based on that
+        if (!empty($this->tagsAsString) && $this->isChanged("TagsAsString")) {
+            $tgIds = array();
+            $tgList = explode(",",$this->tagsAsString);
+            if ($tgList && sizeof($tgList) > 0) {
+                // build the list of tags
+                for($i=0;$i<sizeof($tgList);$i++) {
+                    $tgText = trim($tgList[$i]);
+                    $theTag = DOTag::findOrMakeTag($tgText);
+                    if ($theTag) {
+                        $tgID = $theTag->ID;
+                        if($tgID > 0) {
+                            $tgIds[] = $tgID;
+                        }
+                    }
+                }
+            }
+            // clean up current tags by removing any which are not in the $tgIDs
+            $cTagIDS = $this->Tags()->map("ID","Title")->keys();
+            $delMe = array_diff($cTagIDS,$tgIds);
+            $addMe = array_diff($tgIds,$cTagIDS);
+            foreach($delMe as $id) {
+                $this->Tags()->removeByID($id);
+            }
+            foreach($addMe as $id) {
+                $this->Tags()->add($id);
+            }
+            $this->flushCache();
+
+        }
+    }
 
 
 }
