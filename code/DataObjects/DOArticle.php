@@ -128,7 +128,7 @@ class DOArticle extends DataObject{
 
 
 		$fields->addFieldToTab('Root.Main',new TextField('Title',_t('DOArticles.TITLE',"Title")));
-        $fields->addFieldToTab('Root.Main',new DOTagField($this,'Tags','TagsAsString','Tags',$this->Tags()->column('Title')));
+        $fields->addFieldToTab('Root.Main',new DOTagField($this,'Tags','Tags',$this->Tags()));
 		$fields->addFieldToTab('Root.Main',new HTMLEditorField('Content',_t('DOArticles.CONTENT',"Content")));
 
 		$fields->addFieldToTab('Root.Main', $dateField = new DateField('Date',_t('DOArticles.Date',"Date")));

@@ -42,19 +42,18 @@ class DOTagField extends TextField {
      * @return DOTagField|FormField
      */
     public function setValue($value) {
-        Debug::show($value);
-        if (is_string($value)) { parent::setValue($value); }
-
-        if (is_array($value)) {
+        #Debug::show($value);
+        if (is_a($value,'DataList')) {
+            $vals = $value->column('Title');
+            $vals = implode(", ",$vals);
+            parent::setValue($vals);
+        } else if (is_string($value)) {
+            parent::setValue($value);
+        } else if (is_array($value)) {
             $vals = implode(", ",$value);
             parent::setValue($vals);
         }
 
-        if (is_a($value,'RelationList')) {
-            $vals = $value->column("Title");
-            $vals = implode(", ",$value);
-            parent::setValue($value);
-        }
 
         return $this;
     }
@@ -75,7 +74,7 @@ class DOTagField extends TextField {
                     /** @var bool|DOTag $tag  */
                     $tag = DOTag::findOrCreateTag($tagname);
                     if ($tag) {
-                        Debug::show($tag);
+                        #Debug::show($tag);
                         $keep[] = $tag->ID;
                         if (!$tagrel->find('ID',$tag->ID)) {
                             $tagrel->add($tag);
