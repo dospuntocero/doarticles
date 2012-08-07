@@ -10,7 +10,7 @@ class DOTagField extends TextField {
     protected $controller = null;
     protected $tagSaveType = 'field';
 
-    function __construct(DataObject $controller, $name, $title = null, $values = false, $value = '', $maxLength = null, $form = null) {
+    function __construct(DataObject $controller,  $name, $title = null,  $value = '', $maxLength = null, $form = null) {
         parent::__construct($name, $title, $value, $maxLength, $form);
         $this->controller = $controller;
         if ($this->controller && $this->controller->hasField($name)) {
@@ -19,6 +19,12 @@ class DOTagField extends TextField {
             $this->tagSaveType = 'relation';
         }
 
+       /*
+        if ($values) {
+            $this->setValue($values);
+        }
+        */
+       // Debug::show($this->tagSaveType);
     }
 
     function Field($properties = array()) {
@@ -36,6 +42,7 @@ class DOTagField extends TextField {
      * @return DOTagField|FormField
      */
     public function setValue($value) {
+        Debug::show($value);
         if (is_string($value)) { parent::setValue($value); }
 
         if (is_array($value)) {
@@ -57,22 +64,28 @@ class DOTagField extends TextField {
             if ($this->tagSaveType == 'field') {
                 parent::saveInto($record);
             } else if ($record->hasMethod($this->name)) {
+                //Debug::show($this->Value());
                 $tags = explode(",",$this->Value());
+                //Debug::show($tags);
                 /** @var RelationList $tagrel  */
                 $tagrel = $record->{$this->name}();
+                //Debug::show($tagrel);
                 $keep = array();
                 foreach($tags as $tagname) {
                     /** @var bool|DOTag $tag  */
                     $tag = DOTag::findOrCreateTag($tagname);
                     if ($tag) {
+                        Debug::show($tag);
                         $keep[] = $tag->ID;
                         if (!$tagrel->find('ID',$tag->ID)) {
                             $tagrel->add($tag);
+
                         }
                     }
                 }
                 // delete tags which are no longer on this relation
                 $all = $tagrel->column("ID");
+                //Debug::show($all);
 
                 // do this the hard way since i don't trust the array functions
                 for($i=0;$i<sizeof($all);$i++) {

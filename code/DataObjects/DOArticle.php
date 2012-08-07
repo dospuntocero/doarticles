@@ -122,8 +122,13 @@ class DOArticle extends DataObject{
 
 		$fields = parent::getCMSFields();
 
+        // remove the Tags and   DOArticleHolderPages tabs
+        $fields->fieldByName('Root')->removeByName('Tags');
+        $fields->fieldByName('Root')->removeByName('DOArticleHolderPages');
+
 
 		$fields->addFieldToTab('Root.Main',new TextField('Title',_t('DOArticles.TITLE',"Title")));
+        $fields->addFieldToTab('Root.Main',new DOTagField($this,'Tags','TagsAsString','Tags',$this->Tags()->column('Title')));
 		$fields->addFieldToTab('Root.Main',new HTMLEditorField('Content',_t('DOArticles.CONTENT',"Content")));
 
 		$fields->addFieldToTab('Root.Main', $dateField = new DateField('Date',_t('DOArticles.Date',"Date")));
