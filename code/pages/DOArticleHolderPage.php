@@ -161,4 +161,24 @@ class DOArticleHolderPage_Controller extends Page_Controller {
 	    }
 	    return $this->httpError(404);
 	}
+
+    public function tag() {
+        $tags = false;
+        $theTag = $this->request->param('ID');
+        if (is_numeric($theTag)) {
+            $theTag = (int) $theTag;
+            $tags = DOTag::get()->filter(array('ID'=>$theTag))->First()->Articles("ArticleHolderID = ".$this->ID);
+        } else {
+            $tags = DOTag::get()->filter(array('Title'=>$theTag))->First()->Articles("ArticleHolderID = ".$this->ID);
+        }
+        if ($tags) {
+            $list = new PaginatedList($tags, $this->request);
+            $list->setPageLength(5);
+        } else {
+            $list = false;
+        }
+
+        return $this->customise(array('PaginatedArticles'=>$list));
+
+    }
 }

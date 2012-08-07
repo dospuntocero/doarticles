@@ -1,9 +1,35 @@
 <?php
-class DOArticle extends DataObject{
-	static $singular_name = "Article";
-	static $plural_name = "Articles";
 
-	static $db = array (
+/**
+ * Created by JetBrains PhpStorm.
+ * User: smathews
+ * Date: 8/6/12
+ * Time: 12:59 PM
+ * @package    DOArticles
+ * @subpackage DataObjects
+ * -------------------------------
+ * @property String Title
+ * @property String Content
+ * @property String Excerpt
+ * @property String Date
+ * @property bool Featured
+ * @method ManyManyList DOArticleHolderPages($filter = "", $sort = "", $join = "", $limit = "")
+ *
+ */
+class DOArticle extends DataObject{
+    /**
+     * @var string
+     */
+    static $singular_name = "Article";
+    /**
+     * @var string
+     */
+    static $plural_name = "Articles";
+
+    /**
+     * @var array
+     */
+    static $db = array (
 		'Title' => 'Varchar(255)',
 		'Content' => 'HTMLText',
 		'Excerpt' => 'HTMLText',
@@ -11,45 +37,85 @@ class DOArticle extends DataObject{
 		'Featured' => 'Boolean'
 	);
 
-	static $belongs_many_many = array(
+    /**
+     * @var array
+     */
+    static $many_many = array(
+        'Tags' => 'DOTag'
+    );
+
+    /**
+     * @var array
+     */
+    static $belongs_many_many = array(
 		'DOArticleHolderPages' => 'DOArticleHolderPage',
 	);
-	
-	static $has_one = array (
+
+    /**
+     * @var array
+     */
+    static $has_one = array (
 		'ImageSet' => 'Image'
 	);
 
-	static $searchable_fields = array(
+    /**
+     * @var array
+     */
+    static $searchable_fields = array(
 		'Title',
 		'Content'
 	);
 
-	static $summary_fields = array(
+    /**
+     * @var array
+     */
+    static $summary_fields = array(
 		'SmallTitle' => 'Title'
 	);
 
-	function getSmallTitle(){
+    /**
+     * @return mixed
+     */
+    function getSmallTitle(){
 		return $this->dbObject('Title')->LimitCharacters(90);
 	}
 
-	function Link(){
+    /**
+     * @return String
+     */
+    function Link(){
 //		return "view/".$this->URLSegment;
 		return Controller::join_links($this->DOArticleHolderPages()->Link(),'view',$this->URLSegment);
 	}
 
-	function LinkByMonth($year,$month) {
+    /**
+     * @param $year
+     * @param $month
+     *
+     * @return String
+     */
+    function LinkByMonth($year,$month) {
 		return Controller::join_links($this->Link(),'archive',$year,$month);
-	}
+    }
 
-	function getMonth() {
+    /**
+     * @return string
+     */
+    function getMonth() {
 		return date('M', strtotime($this->Date));
-	}
+    }
 
-	public function getYear() {
+    /**
+     * @return string
+     */
+    public function getYear() {
 		return date('Y',strtotime($this->Date));
-	}
+    }
 
-	public function getCMSFields() {
+    /**
+     * @return FieldList
+     */
+    public function getCMSFields() {
 
 		$UploadField = new UploadField('ImageSet', _t('DOArticles.MainImage',"Main image", null, null, null, "MainImages"));
 		$UploadField->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
