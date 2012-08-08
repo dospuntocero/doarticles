@@ -165,11 +165,12 @@ class DOArticleHolderPage_Controller extends Page_Controller {
     public function tags() {
         $tags = false;
         $theTag = $this->request->param('ID');
+        //Debug::show($theTag);
         if (is_numeric($theTag)) {
             $theTag = (int) $theTag;
-            $tags = DOTag::get()->filter(array('ID'=>$theTag))->First()->Articles("ArticleHolderID = ".$this->ID);
+            $tags = DOTag::get()->filter(array('ID'=>$theTag))->first()->Articles("DOArticle.ID IN (Select zz.DOArticleID FROM DOArticleHolderPage_DOArticles zz where zz.DOArticleHolderPageID = ".$this->data()->ID.")");
         } else {
-            $tags = DOTag::get()->filter(array('Title'=>$theTag))->First()->Articles("ArticleHolderID = ".$this->ID);
+            $tags = DOTag::get()->filter(array('Title'=>$theTag))->first()->Articles("DOArticle.ID IN (Select zz.DOArticleID FROM DOArticleHolderPage_DOArticles zz where zz.DOArticleHolderPageID = ".$this->data()->ID.")");
         }
         if ($tags) {
             $list = new PaginatedList($tags, $this->request);
