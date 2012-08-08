@@ -162,7 +162,7 @@ class DOArticleHolderPage_Controller extends Page_Controller {
 	    return $this->httpError(404);
 	}
 
-    public function tag() {
+    public function tags() {
         $tags = false;
         $theTag = $this->request->param('ID');
         if (is_numeric($theTag)) {
