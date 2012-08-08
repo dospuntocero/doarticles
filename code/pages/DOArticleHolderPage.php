@@ -120,14 +120,14 @@ class DOArticleHolderPage_Controller extends Page_Controller {
         }
 
         if (($theYear > 0) && ($theMonth > 0)) {
-            $theRecs = DataList::create('DOArticle')->filter(array(
-                'ArticleHolderID' => $this->ID,
+            $theRecs = $this->data()->DOArticles()->filter(array(
+               // 'ArticleHolderID' => $this->ID,
                 'Date:ByYear' => $theYear,
                 'Date:ByMonth' => $theMonth
             ))->sort('Date desc');
         } else if ($theYear > 0) {
-            $theRecs = DataList::create('DOArticle')->filter(array(
-                'ArticleHolderID' => $this->ID,
+            $theRecs = $this->data()->DOArticles()->filter(array(
+                //'ArticleHolderID' => $this->ID,
                 'Date:ByYear' => $theYear
             ))->sort('Date desc');
         }
