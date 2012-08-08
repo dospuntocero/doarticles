@@ -2,7 +2,8 @@
 	$Content
 	<% loop DOArticles %>
 		<a href="articles/view/$URLSegment" title="$Title">$Title</a>
-	<% end_loop %>	
+	<% end_loop %>
+    <% if PaginatedArticles %>
 	<% loop PaginatedArticles %>
 		<article>
 			<div class="image left">
@@ -16,6 +17,9 @@
 		</article>
 	<% end_loop %>
 	<% include DOArticlesPagination %>
+    <% else %>
+      // something for no articles here
+    <% end_if %>
 </section>
 <aside id="sidebar">
 
