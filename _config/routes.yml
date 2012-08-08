@@ -1,0 +1,6 @@
+---
+Name: doarticleroutes
+---
+Director:
+  rules:
+    'articles': 'DOArticleViewer'

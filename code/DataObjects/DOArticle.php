@@ -127,10 +127,10 @@ class DOArticle extends DataObject{
         $fields->fieldByName('Root')->removeByName('DOArticleHolderPages');
 
         /** @var TabSet $root  */
-        $root = $fields->fieldByName('Root');
-        $pgtab = $fields->findOrMakeTab('Root.Holders',_t('DOArticles.HoldersTabTitle','Display in Holders'));
-        $pgtab->push(new CheckboxSetField('DOArticleHolderPages','Holder Pages',DOArticleHolderPage::get()->map('ID','Title')));
-
+        // $root = $fields->fieldByName('Root');
+        // $pgtab = $fields->findOrMakeTab('Root.Holders',_t('DOArticles.HoldersTabTitle','Display in Holders'));
+        // $pgtab->push(new CheckboxSetField('DOArticleHolderPages','Holder Pages',DOArticleHolderPage::get()->map('ID','Title')));
+		$fields->addFieldToTab('Root.Main',new CheckboxSetField('DOArticleHolderPages','Holder Pages',DOArticleHolderPage::get()->map('ID','Title')));
 
 		$fields->addFieldToTab('Root.Main',new TextField('Title',_t('DOArticles.TITLE',"Title")));
         $fields->addFieldToTab('Root.Main',$tgfield = new DOTagField($this,'Tags','Tags',$this->Tags()));
