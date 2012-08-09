@@ -5,7 +5,7 @@ class DOArticlesCategoryHolderPage extends Page {
 	static $singular_name = "Article Categories Holder";
 	static $plural_name = "Articles Category Holder";
 	static $icon = "DOArticles/images/files.png";
-	static $description = 'Displays a list of Articles';
+	static $description = 'List of categories';
 
 	static $allowed_children = array("DOArticlesCategoryPage"); // set to string "none" or array of classname(s)
 	static $default_child = "DOArticlesCategoryPage"; //one classname
@@ -16,7 +16,6 @@ class DOArticlesCategoryHolderPage extends Page {
 	static $many_many = array(
 		'DOArticles' => 'DOArticle',
 	);
-	
 
 	public function canCreate($member = null) {
 		return DataList::create("DOArticlesCategoryHolderPage")->count() < 1;
@@ -27,11 +26,9 @@ class DOArticlesCategoryHolderPage extends Page {
 class DOArticlesCategoryHolderPage_Controller extends Page_Controller {
 
 	public function LatestArticles() {
-       //return DataList::create('DOArticle')->filter(array('ArticleHolderID' => $this->ID))->sort('Created')->Limit(5);
-        return $this->data()->DOArticles()->sort('Created')->Limit(5);
-
+		//return DataList::create('DOArticle')->filter(array('ArticleHolderID' => $this->ID))->sort('Created')->Limit(5);
+		return $this->data()->DOArticles()->sort('Created')->Limit(5);
 	}
-
 
 	public function PaginatedArticles() {
 		//$pages = DataList::create('DOArticle')->filter(array('ArticleHolderID' => $this->ID))->sort('Date DESC');

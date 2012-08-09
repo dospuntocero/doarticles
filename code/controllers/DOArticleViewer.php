@@ -114,7 +114,7 @@ class DOArticleViewer extends Page_Controller {
 	
 	
 	public function Tags(){
-		return DOTag::get();
+		return DOTag::get()->sort('Title','ASC');
 	}
 
 	//shows the article for reading
