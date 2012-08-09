@@ -82,11 +82,11 @@ class DOArticle extends DataObject{
     /**
      * @return String
      */
-	function Link(){
-//		return "view/".$this->URLSegment;
-		return Controller::join_links($this->DOArticleHolderPages()->Link(),'view',$this->URLSegment);
-	}
-
+		function Link() {
+			// $c = Controller::curr();
+			// $link = Controller::join_links("articles/".$c->Link('view'),$this->URLSegment);
+			return $this->URLSegment;
+		}
     /**
      * @param $year
      * @param $month

@@ -3,10 +3,10 @@ class DOArticleViewer extends Controller {
 	
 
 	public static $allowed_actions = array (
-		'show'
+		'read'
 	);
 
-	function show(){
+	function read(){
 
 		$pid = $this->URLParams['ID'];
 

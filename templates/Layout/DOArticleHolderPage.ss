@@ -7,8 +7,13 @@
 					$ImageSet.SetWidth(200)
 				</div>
 				<div class="content">
-					<h2><a href="">$Title</a></h2>
+					<h2><a href="article/read/$Link">$Title</a></h2>
 					<p>$Date.Nice</p>
+					<p><% _t('DOArticleHolderPage.TAGGEDAS','Tagged as') %>
+						<% loop Tags %>
+							<a href="$Top.Link/tag/$Title">$Title</a><% if Last %><% else %>, <% end_if %>
+						<% end_loop %>
+					</p>
 					$Excerpt
 				</div>
 			</article>
@@ -20,10 +25,10 @@
 </section>
 
 <aside id="sidebar">
-	<h2>ultimos artículos</h2>
+	<h2><% _t('DOArticleHolderPage.LATESTARTICLES','Latest Articles') %></h2>
 	<ul>
 		<% loop LatestArticles %>
-		<li><a href="">$Title</a></li>
+		<li><a href="$Link">$Title</a></li>
 		<% end_loop %>
 	</ul>
 	

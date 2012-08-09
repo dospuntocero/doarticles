@@ -165,7 +165,7 @@ class DOArticleHolderPage_Controller extends Page_Controller {
 	    return $this->httpError(404);
 	}
 
-    public function tags() {
+    public function tag() {
         $tags = false;
         $theTag = $this->request->param('ID');
         //Debug::show($theTag);
