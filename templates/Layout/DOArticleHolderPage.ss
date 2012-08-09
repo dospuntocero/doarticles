@@ -11,7 +11,7 @@
 					<p>$Date.Nice</p>
 					<p><% _t('DOArticleHolderPage.TAGGEDAS','Tagged as') %>
 						<% loop Tags %>
-							<a href="$Top.Link/tag/$Title">$Title</a><% if Last %><% else %>, <% end_if %>
+							<a href="article/bytag/$Title">$Title</a><% if Last %><% else %>, <% end_if %>
 						<% end_loop %>
 					</p>
 					$Excerpt
@@ -32,5 +32,4 @@
 		<% end_loop %>
 	</ul>
 	
-	<% include Archive %>
 </aside>
