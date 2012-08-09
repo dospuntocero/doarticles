@@ -3,4 +3,4 @@ Name: doarticleroutes
 ---
 Director:
   rules:
-    'articles': 'DOArticleViewer'
+    'article': 'DOArticleViewer'
