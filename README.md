@@ -1,8 +1,10 @@
 #Dataobject Articles for silverstripe 3 - dataobject as pages
 
 ##Whats new?
-Check out the new branch many_many: lots of stuff there.
+Check out the new branch many_many: lots of stuff here!
+
 you can have a holder for categories and multiple articles that belongs many categories, each with multiple tags!!
+
 this is thanks to the amazing support of stuckinrealtime :)
 
 ##Overview
