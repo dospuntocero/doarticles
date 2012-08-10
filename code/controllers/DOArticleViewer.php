@@ -152,7 +152,7 @@ class DOArticleViewer extends Page_Controller {
           $list = false;
       }
 
-      return $this->customise(array('PaginatedArticles'=>$list))->renderWith(array("DOArticleHolderPage","Page"));
+      return $this->customise(array('PaginatedArticles'=>$list))->renderWith(array("DOArticlesCategoryPage","Page"));
 
   }
 }

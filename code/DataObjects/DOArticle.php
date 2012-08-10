@@ -50,6 +50,28 @@ class DOArticle extends DataObject{
 		'DOArticlesCategoryPages' => 'DOArticlesCategoryPage',
 	);
 
+
+	public function getCatsAsString() {
+		$val = $this->DOArticlesCategoryPages()->column('Title');
+		if (is_array($val)) {
+			return join(", ",$val);
+		} else {
+			return '';
+		}
+	}
+
+	public function getTagsAsString() {
+		$val = $this->Tags()->column('Title');
+		if (is_array($val)) {
+			return join(", ",$val);
+		} else {
+			return '';
+		}
+	}
+
+
+
+
     /**
      * @var array
      */
@@ -69,7 +91,9 @@ class DOArticle extends DataObject{
      * @var array
      */
     static $summary_fields = array(
-			'SmallTitle' => 'Title'
+			'SmallTitle' => 'Title',
+			"CatsAsString" => "Categories",
+			"TagsAsString" => "Tags",
 		);
 
     /**
@@ -121,7 +145,7 @@ class DOArticle extends DataObject{
 
 		// remove the Tags and   DOArticleHolderPages tabs
 		$fields->fieldByName('Root')->removeByName('Tags');
-		$fields->fieldByName('Root')->removeByName('DOArticleHolderPages');
+		$fields->fieldByName('Root')->removeByName('DOArticlesCategoryPages');
 
 		/** @var TabSet $root  */
 		// $root = $fields->fieldByName('Root');
@@ -131,7 +155,7 @@ class DOArticle extends DataObject{
 		if ($this->ID) {
 			$UploadField = new UploadField('Image', _t('DOArticles.MainImage',"Main image", null, null, null, _t('DOArticle.IMAGE',"Image")));
 			$UploadField->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
-			$fields->addFieldToTab('Root.Main',new CheckboxSetField('DOArticleHolderPages','Holder Pages',DOArticleHolderPage::get()->map('ID','Title')));
+			$fields->addFieldToTab('Root.Main',new CheckboxSetField('DOArticlesCategoryPages','Holder Pages',DOArticlesCategoryPage::get()->map('ID','Title')));
 			$fields->addFieldToTab('Root.Main',$tgfield = new DOTagField($this,'Tags','Tags',$this->Tags()));			
 			$fields->addFieldToTab("Root.Main", $UploadField);
 			$tgfield->addExtraClass('text');

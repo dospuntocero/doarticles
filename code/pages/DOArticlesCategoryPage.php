@@ -12,11 +12,6 @@ class DOArticlesCategoryPage extends Page {
 	static $many_many = array(
 		'DOArticles' => 'DOArticle',
 	);
-
-	static $has_one = array(
-		'DOArticlesCategoryHolderPage' => 'DOArticlesCategoryHolderPage',
-	);
-
 }
 
 class DOArticlesCategoryPage_Controller extends DOArticleViewer {
