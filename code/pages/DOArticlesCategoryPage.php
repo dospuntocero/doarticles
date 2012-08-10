@@ -9,18 +9,17 @@ class DOArticlesCategoryPage extends Page {
 	static $can_be_root = false; //
 	static $hide_ancestor = null; //dont show ancestry class
 	
-	static $db = array(
-		
+	static $many_many = array(
+		'DOArticles' => 'DOArticle',
 	);
-	
-	
-	
-	
+
+	static $has_one = array(
+		'DOArticlesCategoryHolderPage' => 'DOArticlesCategoryHolderPage',
+	);
+
 }
 
 class DOArticlesCategoryPage_Controller extends DOArticleViewer {
-
-	
 
 
 }

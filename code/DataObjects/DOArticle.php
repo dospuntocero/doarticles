@@ -47,7 +47,7 @@ class DOArticle extends DataObject{
      * @var array
      */
     static $belongs_many_many = array(
-		'DOArticleHolderPages' => 'DOArticleHolderPage',
+		'DOArticlesCategoryPages' => 'DOArticlesCategoryPage',
 	);
 
     /**

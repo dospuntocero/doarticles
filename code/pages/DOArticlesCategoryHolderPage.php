@@ -3,9 +3,8 @@
 class DOArticlesCategoryHolderPage extends Page {
 
 	static $singular_name = "Article Categories Holder";
-	static $plural_name = "Articles Category Holder";
 	static $icon = "DOArticles/images/files.png";
-	static $description = 'List of categories';
+	static $description = 'List of categories for adding articles';
 
 	static $allowed_children = array("DOArticlesCategoryPage"); // set to string "none" or array of classname(s)
 	static $default_child = "DOArticlesCategoryPage"; //one classname
@@ -13,8 +12,8 @@ class DOArticlesCategoryHolderPage extends Page {
 	static $can_be_root = true; //
 	static $hide_ancestor = null; //dont show ancestry class
 
-	static $many_many = array(
-		'DOArticles' => 'DOArticle',
+	static $has_many = array(
+		'DOArticlesCategories' => 'DOArticlesCategory',
 	);
 
 	public function canCreate($member = null) {
