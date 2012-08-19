@@ -1,6 +1,9 @@
 <?php
 class DOArticleViewer extends Page_Controller {
 	
+	
+	
+		
 	public function GroupedArticlesByDate() {
         $rtnval = false;
 
@@ -53,9 +56,14 @@ class DOArticleViewer extends Page_Controller {
     }
 	
 	public function archive() {
+	
         $theRecs = false;
 				$theYear = (int) $this->request->param('ID');
         $theMonth = (int) $this->request->param('OtherID');
+        
+        
+       
+        
 				if (i18n::get_locale() == "es_ES") {
 	        $months = array(
 	            'ene' => 1,
@@ -93,22 +101,27 @@ class DOArticleViewer extends Page_Controller {
             $theMonth = (int) @$months[$theMonth];
         }
         if (($theYear > 0) && ($theMonth > 0)) {
-            $theRecs = $this->data()->DOArticles()->filter(array(
+            $theRecs = DOArticle::get()->filter(array(
                // 'ArticleHolderID' => $this->ID,
                 'Date:ByYear' => $theYear,
                 'Date:ByMonth' => $theMonth
             ))->sort('Date desc');
         } else if ($theYear > 0) {
-            $theRecs = $this->data()->DOArticles()->filter(array(
+            $theRecs =  DOArticle::get()->filter(array(
                 //'ArticleHolderID' => $this->ID,
                 'Date:ByYear' => $theYear
             ))->sort('Date desc');
         }
+        
+                
         if ($theRecs) {
             $theRecs = new PaginatedList($theRecs,$this->request);
             $theRecs->setPageLength(5);
-        }
-        return $this->customise(array('PaginatedArticles'=>$theRecs));
+        } else {
+          $theRecs = false;
+      }
+      	
+        return $this->customise(array('PaginatedArticles'=>$theRecs))->renderWith(array("DOArticlesCategoryPage","Page"));
 	}
 
 	
@@ -119,10 +132,12 @@ class DOArticleViewer extends Page_Controller {
 
 	//shows the article for reading
 	function read(){
+	
 		$pid = $this->URLParams['ID'];
+	
 		$article = DOArticle::get()->filter('URLSegment' , $pid)->First();
 		if($article){
-			return $this->customise(array('Article'=>$article))->renderWith(array("DOArticleHolderPage_view","Page"));
+			return $this->customise( array('Article'=>$article,'Title'=>$article->Title))->renderWith(array("DOArticleHolderPage_view","Page") );
 		}
 		return $this->httpError(404);
 	}
