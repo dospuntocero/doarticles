@@ -14,6 +14,16 @@
 
 class DOTag extends DataObject {
 
+/**
+     * @var string
+     */
+    static $singular_name = "Tag";
+    /**
+     * @var string
+     */
+    static $plural_name = "Tags";
+
+
     public static $db = array(
         'Title' => 'Varchar(255)'
     );
