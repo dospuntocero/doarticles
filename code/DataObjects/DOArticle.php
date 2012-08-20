@@ -109,7 +109,7 @@ class DOArticle extends DataObject{
 		function Link() {
 			// $c = Controller::curr();
 			// $link = Controller::join_links("articles/".$c->Link('view'),$this->URLSegment);
-			return $this->URLSegment;
+			return "/article/read/".$this->URLSegment;
 		}
     /**
      * @param $year
