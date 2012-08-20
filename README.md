@@ -1,8 +1,8 @@
 #Dataobject Articles for silverstripe 3 - dataobject as pages
 
 ##Whats new?
-Now DOArticles has an archive function! that means that your articles can be filtered by year and month. the url for this is your-holderpage/archive/year/month
-if the month is empty it automatically will show all the posts for the complete year paginated. amazing isn't it? -> thanks stuckinrealtime
+DOArticles has a new branch, for people that needs more complex use cases, like tags and articles that belongs to many categories.
+check out the many_many tag.
 
 ##Overview
 
