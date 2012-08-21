@@ -1,4 +1,3 @@
-<% if PaginatedArticles %>
 <% if PaginatedArticles.MoreThanOnePage %>
 	<div class="pagination">
 	  <ul>	  
@@ -30,5 +29,4 @@
 			<% end_if %>
 	  </ul>
 	</div>
-<% end_if %>
 <% end_if %>

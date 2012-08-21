@@ -2,8 +2,8 @@
 /**
  * Created by JetBrains PhpStorm.
  * User: smathews
- * Date: 8/6/12
- * Time: 12:59 PM
+ * Date: 8/3/12
+ * Time: 4:55 PM
  * @package    DOArticles
  * @subpackage DataObjects
  * -------------------------------
@@ -13,16 +13,6 @@
 
 
 class DOTag extends DataObject {
-
-/**
-     * @var string
-     */
-    static $singular_name = "Tag";
-    /**
-     * @var string
-     */
-    static $plural_name = "Tags";
-
 
     public static $db = array(
         'Title' => 'Varchar(255)'
@@ -40,18 +30,15 @@ class DOTag extends DataObject {
         'Articles' => 'DOArticle'
     );
 
-    public static function findOrCreateTag($tagname) {
-        $tag = false;
-        $tagname = trim($tagname);
-        if (!empty($tagname)) {
-            $tag = DoTag::get()->filter(array("Title"=>$tagname))->first();
-            if (!$tag) {
-                $tag = new DoTag();
-                $tag->Title = $tagname;
-                $tag->write();
-            }
+    public static function findOrMakeTag($title) {
+        $tag = DOTag::get()->filter(array("Title"=>$title))->First();
+        if (!$tag) {
+            $tag = new DOTag();
+            $tag->Title = $title;
+            $tag->write();
         }
         return $tag;
     }
+
 }
 

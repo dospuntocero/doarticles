@@ -2,9 +2,7 @@
 <% with Article %>
 	<article>
 	<h1>$Title</h1>
-	<div class="image">
-		$ImageSet.SetWidth(290)
-	</div>
+	$ImageSet.SetWidth(290)
 	<p class="date">$Date</p>
 	$Content
 	</article>

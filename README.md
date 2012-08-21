@@ -1,11 +1,8 @@
 #Dataobject Articles for silverstripe 3 - dataobject as pages
 
 ##Whats new?
-Check out the new branch many_many: lots of stuff here!
-
-you can have a holder for categories and multiple articles that belongs many categories, each with multiple tags!!
-
-this is thanks to the amazing support of stuckinrealtime :)
+DOArticles has a new branch, for people that needs more complex use cases, like tags and articles that belongs to many categories.
+check out the many_many tag.
 
 ##Overview
 
@@ -16,10 +13,6 @@ Just as any other silverstripe module, drag it into the root folder, run dev/bui
 
 ## Usage ##
 With this module you can control Articles in several "Article Holder Pages", those must be created on the sitetree as any other page in the CMS, just configuring it as "Article Holder". When you create a Object with the module, the first thing it will ask is in what article holder will appear (imagine that each holder is a category).
-
-## useful functions ##
-- archive function! that means that your articles can be filtered by year and month. the url for this is your-holderpage/archive/year/month
-if the month is empty it automatically will show all the posts for the complete year paginated. amazing isn't it? -> thanks stuckinrealtime
 
 ## TODO ##
 Search capabilities... im working on this module to learn how silvertripe 3 handles things, so i think this will be the next step.

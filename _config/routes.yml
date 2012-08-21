@@ -1,9 +1,0 @@
----
-Name: doarticleroutes
-After: framework/routes#coreroutes
----
-Director:
-  rules:
-    'article//$Action/$ID/$OtherID': 'DOArticleViewer'
-    
-   
