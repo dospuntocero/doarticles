@@ -1,8 +1,7 @@
 #Dataobject Articles for silverstripe 3 - dataobject as pages
 
 ##Whats new?
-DOArticles has a new branch, for people that needs more complex use cases, like tags and articles that belongs to many categories.
-check out the many_many tag.
+DOArticles simple is a basic solution for clients that doesnt need all the functionality and just want to handle articles in one category for example. Plug and play. easy to use way to work with documents as pages with silverstripe 3. for the full solution use the master branch
 
 ##Overview
 
