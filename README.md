@@ -1,11 +1,9 @@
 #Dataobject Articles for silverstripe 3 - dataobject as pages
 
 ##Whats new?
-Check out the new branch many_many: lots of stuff here!
+I moved the things from one place to another to order the repo. now the master branch will have all the features and i left a small and simple version called 'simple' for the users that only needs to paginate articles in categories that are not related. 
 
-you can have a holder for categories and multiple articles that belongs many categories, each with multiple tags!!
-
-this is thanks to the amazing support of stuckinrealtime :)
+now you can have a holder for categories and multiple articles that belongs many categories, each with multiple tags and even categories between categories!! -sick isn't it?
 
 ##Overview
 
@@ -29,6 +27,9 @@ francisco arenas (fa@dospuntocero.cl)
 
 ## Amazing coder ##
 shawn mathews (stuckinrealtime@gmail.com)
+
+## Thanks to ##
+cam findlay, for helping us improve the module :)
 
 ## License ##
 Do what you want with it, I'm happy that you can use this small module, and if you use it, just let me know and if you can improve it, just sent me a pull request :)
