@@ -7,11 +7,11 @@
 					$Image.SetWidth(200)
 				</div>
 				<div class="content">
-					<h2><a href="article/read/$Link">$Title</a></h2>
+					<h2><a href="$Link">$Title</a></h2>
 					<p>$Date.Nice</p>
 					<p><% _t('DOArticleHolderPage.TAGGEDAS','Tagged as') %>
 						<% loop Tags %>
-							<a href="article/bytag/$URLSegment">$Title</a><% if Last %><% else %>, <% end_if %>
+							<a href="$Link">$Title</a><% if Last %><% else %>, <% end_if %>
 						<% end_loop %>
 					</p>
 					$Excerpt

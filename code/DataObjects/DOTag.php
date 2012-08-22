@@ -34,7 +34,9 @@ class DOTag extends DataObject {
 			"URLSegment" => "URLSegment"
 		);
 
-
+		public function Link(){
+			return "/article/bytag/".$this->URLSegment;
+		}
 
     public static $has_one = array(
 
