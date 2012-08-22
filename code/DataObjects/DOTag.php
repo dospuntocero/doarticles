@@ -23,10 +23,18 @@ class DOTag extends DataObject {
      */
     static $plural_name = "Tags";
 
-
     public static $db = array(
         'Title' => 'Varchar(255)'
     );
+
+
+
+    static $summary_fields = array(
+			'Title' => 'Tag',
+			"URLSegment" => "URLSegment"
+		);
+
+
 
     public static $has_one = array(
 

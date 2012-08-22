@@ -125,10 +125,6 @@ class DOArticleViewer extends Page_Controller {
 	}
 
 	
-	
-	public function Tags(){
-		return DOTag::get()->sort('Title','ASC');
-	}
 
 	//shows the article for reading
 	function read(){
@@ -157,7 +153,7 @@ class DOArticleViewer extends Page_Controller {
           $theTag = (int) $theTag;
           $tags = DOTag::get()->filter(array('ID'=>$theTag))->first()->Articles();
       } else {
-          $tags = DOTag::get()->filter(array('Title'=>$theTag))->first()->Articles();
+          $tags = DOTag::get()->filter(array('URLSegment'=>$theTag))->first()->Articles();
       }
 			// Debug::dump($tags);
       if ($tags) {

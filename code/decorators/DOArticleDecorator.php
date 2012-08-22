@@ -15,7 +15,12 @@ class DOArticleDecorator extends DataExtension{
 	 * @todo - implement a featured functionality.
 	 */
 	function getFeaturedArticles($number=5){
-		//return DOArticle::get('`Featured` = 1', '`Date` DESC', '', $number);
+		return DOArticle::get()->filter("Featured = 1")->sort("Date DESC")->limit($number);
+	}
+
+	
+	public function Tags(){
+		return DOTag::get()->sort('Title','ASC');
 	}
 
 }
