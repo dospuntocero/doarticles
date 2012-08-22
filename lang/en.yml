@@ -1,0 +1,20 @@
+en:
+  DOArticle:
+    PLURALNAME: Articles
+    SINGULARNAME: Article
+  DOArticleHolderPage:
+    LATESTARTICLES: 'Latest Articles'
+    NOARTICLES: 'there is no articles yet '
+    TAGGEDAS: 'Tagged as'
+  DOArticles:
+    CONTENT: Content
+    Date: Date
+    EXCERPT: Excerpt
+    TITLE: Title
+  DOArticlesPagination:
+    NEXT: Next
+    PREV: Prev
+  GroupedByYear:
+    ARTICLESBYMONTH: 'Articles by Month'
+  DOArticlesAdmin:
+    MENUTITLE: Articles
