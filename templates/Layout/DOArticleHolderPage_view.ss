@@ -3,7 +3,7 @@
 	<article>
 	<h1>$Title</h1>
 	<div class="image">
-		$ImageSet.SetWidth(290)
+		$Image.SetWidth(290)
 	</div>
 	<p class="date">$Date</p>
 	$Content

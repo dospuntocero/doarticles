@@ -4,10 +4,10 @@
 		<% loop PaginatedArticles %>
 			<article>
 				<div class="image left">
-					$ImageSet.SetWidth(200)
+					$Image.SetWidth(200)
 				</div>
 				<div class="content">
-					<h2><a href="article/read/$Link">$Title</a></h2>
+					<h2><a href="article/read/$URLSegment">$Title</a></h2>
 					<p>$Date.Nice</p>
 					<p><% _t('DOArticleHolderPage.TAGGEDAS','Tagged as') %>
 						<% loop Tags %>
