@@ -145,6 +145,11 @@ class DOArticleViewer extends Page_Controller {
 		return $list;
 	}
 
+	public function getTagName(){
+		$theTag = $this->request->param('ID');
+		return DOTag::get()->filter(array('URLSegment'=>$theTag))->first()->Title;
+	}
+
   public function bytag() {
       $tags = false;
       $theTag = $this->request->param('ID');

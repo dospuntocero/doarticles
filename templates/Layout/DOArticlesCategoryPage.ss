@@ -1,4 +1,10 @@
 <section id="content-container" class="typography articles">
+	<% if Action = bytag %>
+		<h1><% _t('DOArticlesCategoryPage.TAGGEDAS','Tagged as: ') %>'$tagName'</h1>
+	<% else %>		
+		<h1>$Title</h1>
+	<% end_if %>
+
 	$Content
 	<% if PaginatedArticles %>
 		<% loop PaginatedArticles %>

@@ -16,5 +16,4 @@ class DOArticlesCategoryPage extends Page {
 
 class DOArticlesCategoryPage_Controller extends DOArticleViewer {
 
-
 }
