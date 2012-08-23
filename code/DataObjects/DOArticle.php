@@ -155,8 +155,17 @@ class DOArticle extends DataObject{
 		if ($this->ID) {
 			$UploadField = new UploadField('Image', _t('DOArticles.MainImage',"Main image", null, null, null, _t('DOArticle.IMAGE',"Image")));
 			$UploadField->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
-			$fields->addFieldToTab('Root.Main',new CheckboxSetField('DOArticlesCategoryPages','Holder Pages',DOArticlesCategoryPage::get()->map('ID','Title')));
-			$fields->addFieldToTab('Root.Main',$tgfield = new DOTagField($this,'Tags','Tags',$this->Tags()));			
+			
+			//nicer categories selector
+			$categories = new DOCategoriesField('DOArticlesCategoryPages', 'Categories');
+			$categories->setCategoryHolderNode();
+			$fields->addFieldToTab('Root.Main',$categories);
+			
+			//nicer tags
+			// @todo replace with a ListboxField or nicer tagging ui
+			$fields->addFieldToTab('Root.Main',$tgfield = new DOTagField($this,'Tags','Tags',$this->Tags()));
+			
+						
 			$fields->addFieldToTab("Root.Main", $UploadField);
 			$tgfield->addExtraClass('text');
 		}
