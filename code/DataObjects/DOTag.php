@@ -54,9 +54,9 @@ class DOTag extends DataObject {
         $tag = false;
         $tagname = trim($tagname);
         if (!empty($tagname)) {
-            $tag = DoTag::get()->filter(array("Title"=>$tagname))->first();
+            $tag = DOTag::get()->filter(array("Title"=>$tagname))->first();
             if (!$tag) {
-                $tag = new DoTag();
+                $tag = new DOTag();
                 $tag->Title = $tagname;
                 $tag->write();
             }
