@@ -13,7 +13,7 @@ This is a simple module for adding dataobject as pages functionality on silverst
 Just as any other silverstripe module, drag it into the root folder, run dev/build, and you are done. In the left menu of your site you will find an "Articles" section for adding/editing Article Objects.
 
 ## Usage ##
-With this module you can control Articles in several "Article Holder Pages", those must be created on the sitetree as any other page in the CMS, just configuring it as "Article Holder". When you create a Object with the module, the first thing it will ask is in what article holder will appear (imagine that each holder is a category).
+With this module you can control Articles in several "Article Holder Pages", those must be created inside a Category Holder as any other page in the CMS, just configuring it as "Article Holder". When you create a Object with the module, the first thing it will ask is in what article holder will appear (imagine that each holder is a category).
 
 ## useful functions ##
 - archive function! that means that your articles can be filtered by year and month. the url for this is your-holderpage/archive/year/month
@@ -25,10 +25,8 @@ Search capabilities... im working on this module to learn how silvertripe 3 hand
 ## Maintainer ##
 francisco arenas (fa@dospuntocero.cl)
 
-## Amazing coder ##
+## Amazing coders ##
 shawn mathews (stuckinrealtime@gmail.com)
-
-## Thanks to ##
 cam findlay, for helping us improve the module :)
 
 ## License ##
