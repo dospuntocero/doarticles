@@ -14,14 +14,7 @@
 
 class DOTag extends DataObject {
 
-/**
-     * @var string
-     */
-    static $singular_name = "Tag";
-    /**
-     * @var string
-     */
-    static $plural_name = "Tags";
+
 
     public static $db = array(
         'Title' => 'Varchar(255)'
@@ -29,7 +22,7 @@ class DOTag extends DataObject {
 
 
 
-    static $summary_fields = array(
+    public static $summary_fields = array(
 			'Title' => 'Tag',
 			"URLSegment" => "URLSegment"
 		);
@@ -49,7 +42,30 @@ class DOTag extends DataObject {
     public static $belongs_many_many = array(
         'Articles' => 'DOArticle'
     );
+    
+    /**
+     * @var string
+     */
+    public static $singular_name = "Tag";
+    /**
+     * @var string
+     */
+    public static $plural_name = "Tags";
+    
+    //CRUD Settings
+    public function canCreate($member = null) {return true;}
+	public function canView($member = null) {return true;}
+	public function canEdit($member = null) {return true;}
+	public function canDelete($member = null) {return true;}
 
+/**
+ * Object Methods
+ */
+ 	
+ 	/**
+ 	 * @param string tagname 
+ 	 * @return sting tag - either a new tag or existing use tag Title.
+ 	 */
     public static function findOrCreateTag($tagname) {
         $tag = false;
         $tagname = trim($tagname);
