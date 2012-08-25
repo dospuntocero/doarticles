@@ -17,6 +17,55 @@
  *
  */
 class DOArticle extends DataObject{
+    
+    /**
+     * @var array
+     */
+    public static $db = array (
+		'Title' => 'Varchar(255)',
+		'Content' => 'HTMLText',
+		'Excerpt' => 'HTMLText',
+		'Date' => 'Date'
+	);
+
+	/**
+     * @var array
+     */
+	public static $has_one = array (
+		'Image' => 'Image'
+	);
+	
+	/**
+     * @var array
+     */
+    public static $many_many = array(
+        'Tags' => 'DOTag'
+    );
+    
+    /**
+     * @var array
+     */
+    public static $belongs_many_many = array(
+		'DOArticlesCategoryPages' => 'DOArticlesCategoryPage',
+	);
+
+    /**
+     * @var array
+     */
+    public static $searchable_fields = array(
+		'Title',
+		'Content'
+	);
+
+    /**
+     * @var array
+     */
+    public static $summary_fields = array(
+			'SmallTitle' => 'Title',
+			"CatsAsString" => "Categories",
+			"TagsAsString" => "Tags",
+		);
+
     /**
      * @var string
      */
@@ -25,117 +74,22 @@ class DOArticle extends DataObject{
      * @var string
      */
     static $plural_name = "Articles";
-
-    /**
-     * @var array
-     */
-    static $db = array (
-		'Title' => 'Varchar(255)',
-		'Content' => 'HTMLText',
-		'Excerpt' => 'HTMLText',
-		'Date' => 'Date'
-	);
-
-    /**
-     * @var array
-     */
-    static $many_many = array(
-        'Tags' => 'DOTag'
-    );
-
-    /**
-     * @var array
-     */
-    static $belongs_many_many = array(
-		'DOArticlesCategoryPages' => 'DOArticlesCategoryPage',
-	);
-
-
-	public function getCatsAsString() {
-		$val = $this->DOArticlesCategoryPages()->column('Title');
-		if (is_array($val)) {
-			return join(", ",$val);
-		} else {
-			return '';
-		}
-	}
-
-	public function getTagsAsString() {
-		$val = $this->Tags()->column('Title');
-		if (is_array($val)) {
-			return join(", ",$val);
-		} else {
-			return '';
-		}
-	}
+    
+    //CRUD settings
+    public function canCreate($member = null) {return true;}
+	public function canView($member = null) {return true;}
+	public function canEdit($member = null) {return true;}
+	public function canDelete($member = null) {return true;}
 
 
 
 
-    /**
-     * @var array
-     */
-		static $has_one = array (
-		'Image' => 'Image'
-	);
+/**
+ * Object Methods
+ */
 
-    /**
-     * @var array
-     */
-    static $searchable_fields = array(
-		'Title',
-		'Content'
-	);
 
-    /**
-     * @var array
-     */
-    static $summary_fields = array(
-			'SmallTitle' => 'Title',
-			"CatsAsString" => "Categories",
-			"TagsAsString" => "Tags",
-		);
-
-    /**
-     * @return mixed
-     */
-		function getSmallTitle(){
-			return $this->dbObject('Title')->LimitCharacters(90);
-		}
-
-    /**
-     * @return String
-     */
-		function Link() {
-			// $c = Controller::curr();
-			// $link = Controller::join_links("articles/".$c->Link('view'),$this->URLSegment);
-			return "/article/read/".$this->URLSegment;
-		}
-    /**
-     * @param $year
-     * @param $month
-     *
-     * @return String
-     */
-    function LinkByMonth($year,$month) {
-			return Controller::join_links($this->Link(),'archive',$year,$month);
-    }
-
-    /**
-     * @return string
-     */
-    function getMonth() {
-			return date('M', strtotime($this->Date));
-    }
-
-    /**
-     * @return string
-     */
-    public function getYear() {
-			return date('Y',strtotime($this->Date));
-    }
-
-    /**
+     /**
      * @return FieldList
      */
     public function getCMSFields() {
@@ -184,6 +138,77 @@ class DOArticle extends DataObject{
 
 		return $fields;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getCatsAsString() {
+		$val = $this->DOArticlesCategoryPages()->column('Title');
+		if (is_array($val)) {
+			return join(", ",$val);
+		} else {
+			return '';
+		}
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getTagsAsString() {
+		$val = $this->Tags()->column('Title');
+		if (is_array($val)) {
+			return join(", ",$val);
+		} else {
+			return '';
+		}
+	}
+
+    /**
+     * @return mixed
+     */
+	public function getSmallTitle(){
+			return $this->dbObject('Title')->LimitCharacters(90);
+		}
+
+    /**
+     * @return string
+     */
+    public function getMonth() {
+			return date('M', strtotime($this->Date));
+    }
+
+    /**
+     * @return string
+     */
+    public function getYear() {
+			return date('Y',strtotime($this->Date));
+    }
+
+
+	
+/**
+ * Template Methods
+ */
+	
+	
+	/**
+     * @return String
+     */
+	public function Link() {
+			// $c = Controller::curr();
+			// $link = Controller::join_links("articles/".$c->Link('view'),$this->URLSegment);
+			return "/article/read/".$this->URLSegment;
+		}
+    /**
+     * @param $year
+     * @param $month
+     *
+     * @return String
+     */
+    public function LinkByMonth($year,$month) {
+			return Controller::join_links($this->Link(),'archive',$year,$month);
+    }
+
 
 
 }
