@@ -1,0 +1,20 @@
+es:
+  DOArticle:
+    PLURALNAME: Artículos
+    SINGULARNAME: Artículo
+  DOArticleHolderPage:
+    LATESTARTICLES: 'Últimos artículos'
+    NOARTICLES: 'no hay artículos aún'
+    TAGGEDAS: 'Etiquetado como: '
+  DOArticles:
+    CONTENT: Contenido
+    Date: Fecha
+    EXCERPT: Resumen
+    TITLE: Título
+  DOArticlesPagination:
+    NEXT: Siguiente
+    PREV: Anterior
+  GroupedByYear:
+    ARTICLESBYMONTH: 'Artículos por mes'
+  DOArticlesAdmin:
+    MENUTITLE: Artículos

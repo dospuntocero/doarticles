@@ -118,6 +118,9 @@ class DOArticle extends DataObject{
 			//nicer tags
 			// @todo replace with a ListboxField or nicer tagging ui
 			$fields->addFieldToTab('Root.Main',$tgfield = new DOTagField($this,'Tags','Tags',$this->Tags()));
+			$fields->addFieldToTab('Root.Main',new LiteralField('TagList','<div class="field text"><label class="left">'._t('DOArticle.AVAILABLETAGS',"Available Tags").'</label><div class="middleColumn">'.$this->ShowTagsList()."</div></div>"));
+			
+				
 			
 						
 			$fields->addFieldToTab("Root.Main", $UploadField);
@@ -146,6 +149,26 @@ class DOArticle extends DataObject{
 		$val = $this->DOArticlesCategoryPages()->column('Title');
 		if (is_array($val)) {
 			return join(", ",$val);
+		} else {
+			return '';
+		}
+	}
+
+	/**
+	 * @return string
+	 */
+	
+	public function ShowTagsList() {
+		$val = DOTag::get()->column('Title');
+		$taglist = "<div class=''>";
+		if (is_array($val)) {
+			return join(", ",$val);
+			
+			// foreach ($val as $value) {
+			// 	$taglist.= '<span title="'.$value.'" class="badge modified">'.$value.'</span>, ';
+			// }
+			// $taglist.="</div>";
+			// return $taglist;
 		} else {
 			return '';
 		}

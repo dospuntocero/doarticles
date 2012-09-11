@@ -29,13 +29,4 @@
 		<% _t('DOArticleHolderPage.NOARTICLES','there is no articles yet ') %>
 	<% end_if %>
 </section>
-
-<aside id="sidebar">
-	<h2><% _t('DOArticleHolderPage.LATESTARTICLES','Latest Articles') %></h2>
-	<ul>
-		<% loop LatestArticles %>
-		<li><a href="$Link">$Title</a></li>
-		<% end_loop %>
-	</ul>
-	
-</aside>
+<% include DOArticleSidebar %>
