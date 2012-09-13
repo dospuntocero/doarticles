@@ -36,6 +36,6 @@ Do what you want with it, I'm happy that you can use this small module, and if y
 I stole one icon (the article holder page), but i dont remember from where. i will add the proper attribution when i remember. [sorry pal, you make awesome icons!]
 
 ## The image ##
-[module in action](https://img.skitch.com/20120913-bt8a4yh63bxi6ft9gd47qmgsim.png "an article being edited")
+![module in action](https://img.skitch.com/20120913-bt8a4yh63bxi6ft9gd47qmgsim.png "an article being edited")
 
 
