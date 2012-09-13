@@ -97,34 +97,32 @@ class DOArticle extends DataObject{
 		$fields = parent::getCMSFields();
 		
 
-		// remove the Tags and   DOArticleHolderPages tabs
+		// remove the Tags and DOArticleHolderPages tabs
 		$fields->fieldByName('Root')->removeByName('Tags');
 		$fields->fieldByName('Root')->removeByName('DOArticlesCategoryPages');
-
-		/** @var TabSet $root  */
-		// $root = $fields->fieldByName('Root');
-		// $pgtab = $fields->findOrMakeTab('Root.Holders',_t('DOArticles.HoldersTabTitle','Display in Holders'));
-		// $pgtab->push(new CheckboxSetField('DOArticleHolderPages','Holder Pages',DOArticleHolderPage::get()->map('ID','Title')));
 		$fields->removeFieldFromTab("Root.Main","Image");
+
 		if ($this->ID) {
 			$UploadField = new UploadField('Image', _t('DOArticles.MainImage',"Main image", null, null, null, _t('DOArticle.IMAGE',"Image")));
 			$UploadField->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
 			
-			//nicer categories selector
 			$categories = new DOCategoriesField('DOArticlesCategoryPages', 'Categories');
 			$categories->setCategoryHolderNode();
 			$fields->addFieldToTab('Root.Main',$categories);
 			
-			//nicer tags
-			// @todo replace with a ListboxField or nicer tagging ui
-			$fields->addFieldToTab('Root.Main',$tgfield = new DOTagField($this,'Tags','Tags',$this->Tags()));
-			$fields->addFieldToTab('Root.Main',new LiteralField('TagList','<div class="field text"><label class="left">'._t('DOArticle.AVAILABLETAGS',"Available Tags").'</label><div class="middleColumn">'.$this->ShowTagsList()."</div></div>"));
-			
-				
-			
-						
+			$tagsMap = DOTag::get()->map('ID', 'Title')->toArray();
+			asort($tagsMap);
+			$fields->addFieldToTab('Root.Main',
+				ListboxField::create('Tags', 'Tags')
+					->setMultiple(true)
+					->setSource($tagsMap)
+					->setAttribute(
+						'data-placeholder', 
+						_t('DOArticle.ADDTAGS', 'Add tags', 'add tags')
+					)
+			);
+
 			$fields->addFieldToTab("Root.Main", $UploadField);
-			$tgfield->addExtraClass('text');
 		}
 
 		$fields->addFieldToTab('Root.Main', new TextField('Title',_t('DOArticles.TITLE',"Title")));
@@ -154,25 +152,6 @@ class DOArticle extends DataObject{
 		}
 	}
 
-	/**
-	 * @return string
-	 */
-	
-	public function ShowTagsList() {
-		$val = DOTag::get()->column('Title');
-		$taglist = "<div class=''>";
-		if (is_array($val)) {
-			return join(", ",$val);
-			
-			// foreach ($val as $value) {
-			// 	$taglist.= '<span title="'.$value.'" class="badge modified">'.$value.'</span>, ';
-			// }
-			// $taglist.="</div>";
-			// return $taglist;
-		} else {
-			return '';
-		}
-	}
 	
 	/**
 	 * @return string
