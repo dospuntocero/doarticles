@@ -4,7 +4,7 @@
 		<% loop PaginatedArticles %>
 			<article>
 				<div class="image left">
-					$Image.SetWidth(200)
+					$MainImage.SetWidth(200)
 				</div>
 				<div class="content">
 					<h2><a href="$Link">$Title</a></h2>

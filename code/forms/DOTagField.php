@@ -31,7 +31,7 @@ class DOTagField extends TextField {
         if ($this->controller->ID) {
             return parent::Field($properties);
         } else {
-            return '<h4>Please Save Before You Can Add Tags</h4>';
+            return _t('DOTagField.PLEASESAVEFIRST',"<h4>Please Save Before You Can Add Tags</h4>");
         }
     }
 

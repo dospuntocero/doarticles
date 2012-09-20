@@ -18,13 +18,13 @@ class DOArticlesCategoryHolderPage extends Page {
 
 }
 
-class DOArticlesCategoryHolderPage_Controller extends Page_Controller {
+class DOArticlesCategoryHolderPage_Controller extends DOArticleViewer {
 
-	public function PaginatedArticles() {
-		//$pages = DataList::create('DOArticle')->filter(array('ArticleHolderID' => $this->ID))->sort('Date DESC');
-		$pages = DOArticle::get()->sort('Date DESC');
-		$list = new PaginatedList($pages, $this->request);
-		$list->setPageLength(5);
-		return $list;
+	//always redirect to the first category
+	function init(){
+		parent::init();
+		if($this->Children()->Count()){
+			Director::redirect($this->Children()->First()->AbsoluteLink());
+		}
 	}
 }

@@ -5,7 +5,7 @@
  * User: smathews
  * Date: 8/6/12
  * Time: 12:59 PM
- * @package    DOArticles
+ * @package	DOArticles
  * @subpackage DataObjects
  * -------------------------------
  * @property String Title
@@ -17,11 +17,11 @@
  *
  */
 class DOArticle extends DataObject{
-    
-    /**
-     * @var array
-     */
-    public static $db = array (
+	
+	/**
+	 * @var array
+	 */
+	public static $db = array (
 		'Title' => 'Varchar(255)',
 		'Content' => 'HTMLText',
 		'Excerpt' => 'HTMLText',
@@ -29,54 +29,47 @@ class DOArticle extends DataObject{
 	);
 
 	/**
-     * @var array
-     */
-	public static $has_one = array (
-		'Image' => 'Image'
+	 * @var array
+	 */
+	public static $many_many = array(
+		'Tags' => 'DOTag'
 	);
 	
 	/**
-     * @var array
-     */
-    public static $many_many = array(
-        'Tags' => 'DOTag'
-    );
-    
-    /**
-     * @var array
-     */
-    public static $belongs_many_many = array(
+	 * @var array
+	 */
+	public static $belongs_many_many = array(
 		'DOArticlesCategoryPages' => 'DOArticlesCategoryPage',
 	);
 
-    /**
-     * @var array
-     */
-    public static $searchable_fields = array(
+	/**
+	 * @var array
+	 */
+	public static $searchable_fields = array(
 		'Title',
 		'Content'
 	);
 
-    /**
-     * @var array
-     */
-    public static $summary_fields = array(
+	/**
+	 * @var array
+	 */
+	public static $summary_fields = array(
 			'SmallTitle' => 'Title',
 			"CatsAsString" => "Categories",
 			"TagsAsString" => "Tags",
 		);
 
-    /**
-     * @var string
-     */
-    static $singular_name = "Article";
-    /**
-     * @var string
-     */
-    static $plural_name = "Articles";
-    
-    //CRUD settings
-    public function canCreate($member = null) {return true;}
+	/**
+	 * @var string
+	 */
+	static $singular_name = "Article";
+	/**
+	 * @var string
+	 */
+	static $plural_name = "Articles";
+	
+	//CRUD settings
+	public function canCreate($member = null) {return true;}
 	public function canView($member = null) {return true;}
 	public function canEdit($member = null) {return true;}
 	public function canDelete($member = null) {return true;}
@@ -89,10 +82,10 @@ class DOArticle extends DataObject{
  */
 
 
-     /**
-     * @return FieldList
-     */
-    public function getCMSFields() {
+	 /**
+	 * @return FieldList
+	 */
+	public function getCMSFields() {
 
 		$fields = parent::getCMSFields();
 		
@@ -100,12 +93,8 @@ class DOArticle extends DataObject{
 		// remove the Tags and DOArticleHolderPages tabs
 		$fields->fieldByName('Root')->removeByName('Tags');
 		$fields->fieldByName('Root')->removeByName('DOArticlesCategoryPages');
-		$fields->removeFieldFromTab("Root.Main","Image");
 
 		if ($this->ID) {
-			$UploadField = new UploadField('Image', _t('DOArticles.MainImage',"Main image", null, null, null, _t('DOArticle.IMAGE',"Image")));
-			$UploadField->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
-			
 			$categories = new DOCategoriesField('DOArticlesCategoryPages', 'Categories');
 			$categories->setCategoryHolderNode();
 			$fields->addFieldToTab('Root.Main',$categories);
@@ -121,21 +110,20 @@ class DOArticle extends DataObject{
 						_t('DOArticle.ADDTAGS', 'Add tags', 'add tags')
 					)
 			);
-
-			$fields->addFieldToTab("Root.Main", $UploadField);
 		}
 
 		$fields->addFieldToTab('Root.Main', new TextField('Title',_t('DOArticles.TITLE',"Title")));
-
-
-		$fields->addFieldToTab('Root.Main',new HTMLEditorField('Content',_t('DOArticles.CONTENT',"Content")));
-
+		$fields->addFieldToTab('Root.Main',$cont = new HTMLEditorField('Content',_t('DOArticles.CONTENT',"Content")));
+		$cont->setRows(10);
 		$fields->addFieldToTab('Root.Main', $dateField = new DateField('Date',_t('DOArticles.Date',"Date")));
 		$dateField->setConfig('showcalendar', true);
 		$dateField->setConfig('dateformat', 'dd/MM/YYYY');
 
 		$fields->addFieldToTab('Root.Main',new TextareaField('Excerpt',_t('DOArticles.EXCERPT',"Excerpt")));
 		$fields->removeFieldFromTab("Root.Main","URLSegment");
+
+		//allow extend this object with other modules
+		$this->extend('updateCMSFields', $fields);
 
 		return $fields;
 	}
@@ -165,26 +153,26 @@ class DOArticle extends DataObject{
 		}
 	}
 
-    /**
-     * @return mixed
-     */
+	/**
+	 * @return mixed
+	 */
 	public function getSmallTitle(){
 			return $this->dbObject('Title')->LimitCharacters(90);
 		}
 
-    /**
-     * @return string
-     */
-    public function getMonth() {
+	/**
+	 * @return string
+	 */
+	public function getMonth() {
 			return date('M', strtotime($this->Date));
-    }
+	}
 
-    /**
-     * @return string
-     */
-    public function getYear() {
+	/**
+	 * @return string
+	 */
+	public function getYear() {
 			return date('Y',strtotime($this->Date));
-    }
+	}
 
 
 	
@@ -194,22 +182,22 @@ class DOArticle extends DataObject{
 	
 	
 	/**
-     * @return String
-     */
+	 * @return String
+	 */
 	public function Link() {
 			// $c = Controller::curr();
 			// $link = Controller::join_links("articles/".$c->Link('view'),$this->URLSegment);
 			return "/article/read/".$this->URLSegment;
 		}
-    /**
-     * @param $year
-     * @param $month
-     *
-     * @return String
-     */
-    public function LinkByMonth($year,$month) {
+	/**
+	 * @param $year
+	 * @param $month
+	 *
+	 * @return String
+	 */
+	public function LinkByMonth($year,$month) {
 			return Controller::join_links($this->Link(),'archive',$year,$month);
-    }
+	}
 
 
 

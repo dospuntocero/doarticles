@@ -12,6 +12,33 @@ class DOArticlesCategoryPage extends Page {
 	static $many_many = array(
 		'DOArticles' => 'DOArticle',
 	);
+	
+	public function canCreate($member = null) {
+		return DataList::create("DOArticlesCategoryHolderPage")->count() >= 1;
+	}
+
+	
+	
+	public function getCMSFields() {
+
+		$fields = parent::getCMSFields();
+
+		$config = GridFieldConfig::create();
+		$config->addComponent(new GridFieldToolbarHeader());
+		$config->addComponent(new GridFieldAddNewButton('toolbar-header-right'));
+		$config->addComponent(new GridFieldDataColumns());
+		$config->addComponent(new GridFieldEditButton());
+		$config->addComponent(new GridFieldDeleteAction());
+		$config->addComponent(new GridFieldDetailForm());
+		$config->addComponent(new GridFieldSortableHeader());
+
+		$gridField = new GridField('DOArticles', _t('DOArticlesCategoryPage.ARTICLES',"Articles"), $this->DOArticles(), $config);
+
+		$fields->addFieldToTab("Root.Articles", $gridField);
+		return $fields;
+	}
+	
+	
 }
 
 class DOArticlesCategoryPage_Controller extends DOArticleViewer {
