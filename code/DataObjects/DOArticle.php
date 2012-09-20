@@ -114,7 +114,6 @@ class DOArticle extends DataObject{
 
 		$fields->addFieldToTab('Root.Main', new TextField('Title',_t('DOArticles.TITLE',"Title")));
 		$fields->addFieldToTab('Root.Main',$cont = new HTMLEditorField('Content',_t('DOArticles.CONTENT',"Content")));
-		$cont->setRows(10);
 		$fields->addFieldToTab('Root.Main', $dateField = new DateField('Date',_t('DOArticles.Date',"Date")));
 		$dateField->setConfig('showcalendar', true);
 		$dateField->setConfig('dateformat', 'dd/MM/YYYY');
