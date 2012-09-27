@@ -20,4 +20,8 @@ class DOArticleDecorator extends DataExtension{
 	public function Tags(){
 		return DOTag::get()->sort('Title','ASC');
 	}
+	
+	public function getArticleHolder(){
+		return DOArticlesCategoryHolderPage::get()->first()->Children();
+	}
 }
