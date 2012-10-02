@@ -118,8 +118,8 @@ class DOArticleViewer extends Page_Controller {
 
 	//shows the article for reading
 	function read(){
-	
-		$pid = $this->URLParams['ID'];
+		//needed for avoiding (+) signs on urls
+		$pid = Convert::raw2url($this->URLParams['ID']);
 	
 		$article = DOArticle::get()->filter('URLSegment' , $pid)->First();
 		if($article){
