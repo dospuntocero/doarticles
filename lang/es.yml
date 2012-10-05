@@ -1,20 +1,39 @@
 es:
   DOArticle:
+    ADDTAGS: 'Agregar etiquetas'
     PLURALNAME: Artículos
     SINGULARNAME: Artículo
   DOArticleHolderPage:
-    LATESTARTICLES: 'Últimos artículos'
-    NOARTICLES: 'no hay artículos aún'
-    TAGGEDAS: 'Etiquetado como: '
+    LATESTARTICLES: 'Ultimos artículos'
+    NOARTICLES: 'No hay artículos todavía'
+    TAGGEDAS: 'Etiquetado como'
   DOArticles:
     CONTENT: Contenido
     Date: Fecha
-    EXCERPT: Resumen
+    EXCERPT: Extracto
     TITLE: Título
+  DOArticlesCategoryHolderPage:
+    DESCRIPTION: 'Lista de categorías para agregar artículos'
+    PLURALNAME: 'Contenedores de artículos'
+    SINGULARNAME: 'Contenedor de artículos'
+  DOArticlesCategoryPage:
+    ARTICLES: Artículos
+    DESCRIPTION: 'Página de Categorías para los artículos'
+    PLURALNAME: 'Páginas de Categorías de los artículos'
+    SINGULARNAME: 'Página de Categorías de los artículos'
+    TAGGEDAS: 'Etiquetado como: '
   DOArticlesPagination:
     NEXT: Siguiente
-    PREV: Anterior
+    PREV: Previo
+  DOTag:
+    PLURALNAME: Etiquetas
+    SINGULARNAME: Etiqueta
+  DOTagField:
+    PLEASESAVEFIRST: '<h4>Por favor, guarde el artículo antes de agregar etiquetas</h4>'
   GroupedByYear:
     ARTICLESBYMONTH: 'Artículos por mes'
+  SiteTree:
+    PLURALNAME: Páginas
+    SINGULARNAME: Página
   DOArticlesAdmin:
     MENUTITLE: Artículos

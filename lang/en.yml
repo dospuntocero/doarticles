@@ -1,5 +1,6 @@
 en:
   DOArticle:
+    ADDTAGS: 'Add tags'
     PLURALNAME: Articles
     SINGULARNAME: Article
   DOArticleHolderPage:
@@ -11,10 +12,28 @@ en:
     Date: Date
     EXCERPT: Excerpt
     TITLE: Title
+  DOArticlesCategoryHolderPage:
+    DESCRIPTION: 'List of categories for adding articles'
+    PLURALNAME: 'Article Categories Holders'
+    SINGULARNAME: 'Article Categories Holder'
+  DOArticlesCategoryPage:
+    ARTICLES: Articles
+    DESCRIPTION: 'Generic content page'
+    PLURALNAME: 'Articles Category Pags'
+    SINGULARNAME: 'Articles Category Page'
+    TAGGEDAS: 'Tagged as: '
   DOArticlesPagination:
     NEXT: Next
     PREV: Prev
+  DOTag:
+    PLURALNAME: Tags
+    SINGULARNAME: Tag
+  DOTagField:
+    PLEASESAVEFIRST: '<h4>Please Save Before You Can Add Tags</h4>'
   GroupedByYear:
     ARTICLESBYMONTH: 'Articles by Month'
+  SiteTree:
+    PLURALNAME: Pages
+    SINGULARNAME: Page
   DOArticlesAdmin:
     MENUTITLE: Articles
