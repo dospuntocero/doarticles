@@ -82,13 +82,18 @@ class DOArticle extends DataObject{
  */
 
 
+
 	 /**
 	 * @return FieldList
 	 */
 	public function getCMSFields() {
-
+    $MyTags = function (){
+  		$tagsMap = DOTag::get()->map()->toArray();
+  		asort($tagsMap);
+      return $tagsMap;
+    };
+    
 		$fields = parent::getCMSFields();
-		
 
 		// remove the Tags and DOArticleHolderPages tabs
 		$fields->fieldByName('Root')->removeByName('Tags');
@@ -99,21 +104,22 @@ class DOArticle extends DataObject{
 			$categories->setCategoryHolderNode();
 			$fields->addFieldToTab('Root.Main',$categories);
 			
-			$tagsMap = DOTag::get()->map('ID', 'Title')->toArray();
-			asort($tagsMap);
 			$fields->addFieldToTab('Root.Main',
-				ListboxField::create('Tags', 'Tags')
+				$addtags = ListboxField::create('Tags', 'Tags')
 					->setMultiple(true)
-					->setSource($tagsMap)
+					->setSource($MyTags())
 					->setAttribute(
 						'data-placeholder', 
 						_t('DOArticle.ADDTAGS', 'Add tags', 'add tags')
 					)
 			);
+
+			
+			$addtags->useAddNew('DOTag',$MyTags());
 		}
 
 		$fields->addFieldToTab('Root.Main', new TextField('Title',_t('DOArticles.TITLE',"Title")));
-		$fields->addFieldToTab('Root.Main',$cont = new HTMLEditorField('Content',_t('DOArticles.CONTENT',"Content")));
+		$fields->addFieldToTab('Root.Main', $cont = new HTMLEditorField('Content',_t('DOArticles.CONTENT',"Content")));
 		$fields->addFieldToTab('Root.Main', $dateField = new DateField('Date',_t('DOArticles.Date',"Date")));
 		$dateField->setConfig('showcalendar', true);
 		$dateField->setConfig('dateformat', 'dd/MM/YYYY');

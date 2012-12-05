@@ -50,6 +50,14 @@ class DOTag extends DataObject {
 	public function canEdit($member = null) {return true;}
 	public function canDelete($member = null) {return true;}
 
+
+	public function getCMSFields() {
+		$fields = parent::getCMSFields();
+		$fields->fieldByName('Root')->removeByName('URLSegment');
+		return $fields;
+  }
+
+
 	/**
 	* Object Methods
 	*/
