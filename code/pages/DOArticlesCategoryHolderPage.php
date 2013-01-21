@@ -24,7 +24,7 @@ class DOArticlesCategoryHolderPage_Controller extends DOArticleViewer {
 	function init(){
 		parent::init();
 		if($this->Children()->Count()){
-			Director::redirect($this->Children()->First()->AbsoluteLink());
+			Controller::curr()->redirectBack($this->Children()->First()->AbsoluteLink());
 		}
 	}
 }
