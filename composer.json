@@ -1,0 +1,15 @@
+{
+    "description": "Silverstripe articles as dataobjects module",
+    "minimum-stability": "dev", 
+    "name": "silverstripe/DOArticles", 
+    "require": {
+        "php": ">=5.3.2", 
+        "silverstripe/cms": "3.1.*", 
+        "silverstripe/framework": "3.1.*",
+
+    },
+    "config": { 
+         "vendor-dir": "/" 
+    } 
+
+}
