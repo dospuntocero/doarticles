@@ -123,7 +123,7 @@ class DOArticleViewer extends Page_Controller {
 	
 		$article = DOArticle::get()->filter('URLSegment' , $pid)->First();
 		if($article){
-			return $this->customise( array('Article'=>$article,'Title'=>$article->Title))->renderWith(array("DOArticleHolderPage_view","Page") );
+			return $this->customise( array('Article'=>$article,'Title'=>$article->Title))->renderWith(array("DOArticle_read","Page") );
 		}
 		return $this->httpError(404);
 	}
