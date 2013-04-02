@@ -1,5 +1,5 @@
 {
-    "name": "dospuntocero/DOArticles",
+    "name": "dospuntocero/doarticles",
     "description": "Silverstripe articles as dataobjects module",
     "type": "silverstripe-module",
     "keywords": ["silverstripe", "dataobject", "blog", "dataobjects as pages"],
