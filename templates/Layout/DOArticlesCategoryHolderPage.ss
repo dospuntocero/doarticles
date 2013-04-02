@@ -9,12 +9,19 @@
 				<div class="content">
 					<h2><a href="$Link">$Title</a></h2>
 					<p>$Date.Nice</p>
+					
+					<% if Tags %>
 					<p><% _t('DOArticleHolderPage.TAGGEDAS','Tagged as') %>
 						<% loop Tags %>
-							<a href="$Link">$Title</a><% if Last %><% else %>, <% end_if %>
+							<a href="$URLSegment">$Title</a><% if Last %><% else %>, <% end_if %>
 						<% end_loop %>
-					</p>
-					$Excerpt
+					</p>					
+					<% end_if %>
+					<% if Excerpt %>
+						$Excerpt
+					<% else %>
+						$Content.LimitCharacters(100)
+					<% end_if %>
 				</div>
 			</article>
 		<% end_loop %>
