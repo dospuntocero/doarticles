@@ -1,4 +1,5 @@
-<aside id="sidebar" class="grid_1-4">
+<aside id="sidebar">
+	<% if Menu(3) %>
 	<nav class="secondary">
 		<h3>Categorías</h3>
 		<ul>
@@ -9,7 +10,9 @@
 			<% end_loop %>
 		</ul>
 	</nav>
-
+	
+	<% end_if %>
+	<% if Tags %>
 	<nav class="secondary">
 		<h3>Tagcloud</h3>
 		<ul>
@@ -18,6 +21,9 @@
 			<% end_loop %>
 		</ul>
 	</nav>
+	
+	<% end_if %>
+	<% if LatestArticles %>
 	<nav class="secondary">
 		<h2><% _t('DOArticleHolderPage.LATESTARTICLES','Latest Articles') %></h2>
 		<ul>
@@ -26,5 +32,7 @@
 			<% end_loop %>
 		</ul>
 	</nav>
+	
+	<% end_if %>
 	
 </aside>
