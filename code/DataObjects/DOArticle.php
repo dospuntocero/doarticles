@@ -86,37 +86,35 @@ class DOArticle extends DataObject{
 	 /**
 	 * @return FieldList
 	 */
-	public function getCMSFields() {
-    $MyTags = function (){
-  		$tagsMap = DOTag::get()->map()->toArray();
-  		asort($tagsMap);
-      return $tagsMap;
-    };
+     public function getCMSFields() {
+         $MyTags = function (){
+             $tagsMap = DOTag::get()->map()->toArray();
+             asort($tagsMap);
+             return $tagsMap;
+         };
     
-		$fields = parent::getCMSFields();
+	$fields = parent::getCMSFields();
 
-		// remove the Tags and DOArticleHolderPages tabs
-		$fields->fieldByName('Root')->removeByName('Tags');
-		$fields->fieldByName('Root')->removeByName('DOArticlesCategoryPages');
+	// remove the Tags and DOArticleHolderPages tabs
+	$fields->fieldByName('Root')->removeByName('Tags');
+	$fields->fieldByName('Root')->removeByName('DOArticlesCategoryPages');
 
-		if ($this->ID) {
-			$categories = new DOCategoriesField('DOArticlesCategoryPages', 'Categories');
-			$categories->setCategoryHolderNode();
-			$fields->addFieldToTab('Root.Main',$categories);
-			
-			$fields->addFieldToTab('Root.Main',
-				$addtags = ListboxField::create('Tags', 'Tags')
-					->setMultiple(true)
-					->setSource($MyTags())
-					->setAttribute(
-						'data-placeholder', 
-						_t('DOArticle.ADDTAGS', 'Add tags', 'add tags')
-					)
-			);
+		$categories = new DOCategoriesField('DOArticlesCategoryPages', 'Categories');
+		$categories->setCategoryHolderNode();
+		$fields->addFieldToTab('Root.Main',$categories);
+		
+		$fields->addFieldToTab('Root.Main',
+			$addtags = ListboxField::create('Tags', 'Tags')
+				->setMultiple(true)
+				->setSource($MyTags())
+				->setAttribute(
+					'data-placeholder', 
+					_t('DOArticle.ADDTAGS', 'Add tags', 'add tags')
+				)
+		);
 
-			
-			$addtags->useAddNew('DOTag',$MyTags());
-		}
+		
+		$addtags->useAddNew('DOTag',$MyTags());
 
 		$fields->addFieldToTab('Root.Main', new TextField('Title',_t('DOArticles.TITLE',"Title")));
 		$fields->addFieldToTab('Root.Main', $cont = new HTMLEditorField('Content',_t('DOArticles.CONTENT',"Content")));
